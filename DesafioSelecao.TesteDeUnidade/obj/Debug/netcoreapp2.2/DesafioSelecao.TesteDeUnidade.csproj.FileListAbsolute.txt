@@ -15,3 +15,5 @@ E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug
 E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.csproj.CopyComplete
 E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.dll
 E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.pdb
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\DesafioSelecao.Aplicacao.dll
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\DesafioSelecao.Aplicacao.pdb

@@ -1,2 +1,14 @@
 
 .vs/
+
+DesafioSelecao.Aplicacao/bin/
+
+DesafioSelecao.Aplicacao/obj/
+
+DesafioSelecao.Dominio/bin/
+
+DesafioSelecao.Dominio/obj/
+
+DesafioSelecao.TesteDeUnidade/bin/
+
+DesafioSelecao.TesteDeUnidade/obj/

@@ -4,8 +4,7 @@ namespace DesafioSelecao.Dominio.Criterios
 {
     public class CriterioDeRendaInferiorA900: Criterio
     {
-        private const int Pontos = 5;
-
+        public int Pontos => 5;
         public override int EhAtendidoPela(Familia familia)
         {
             var rendaTotalDaFamilia = familia.Pessoas.Sum(p => p.Renda.Valor);

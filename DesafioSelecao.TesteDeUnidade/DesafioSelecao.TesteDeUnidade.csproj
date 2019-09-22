@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ExpectedObjects" Version="2.3.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Nosbor.FluentBuilder" Version="1.1.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
@@ -14,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DesafioSelecao.Aplicacao\DesafioSelecao.Aplicacao.csproj" />
     <ProjectReference Include="..\DesafioSelecao.Dominio\DesafioSelecao.Dominio.csproj" />
   </ItemGroup>
 
