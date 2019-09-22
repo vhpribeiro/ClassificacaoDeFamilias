@@ -1,0 +1,17 @@
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.deps.json
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.runtimeconfig.json
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.runtimeconfig.dev.json
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.dll
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.csprojAssemblyReference.cache
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.csproj.CoreCompileInputs.cache
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.AssemblyInfoInputs.cache
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.AssemblyInfo.cs
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.pdb
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\DesafioSelecao.Dominio.dll
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\bin\Debug\netcoreapp2.2\DesafioSelecao.Dominio.pdb
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.csproj.CopyComplete
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.dll
+E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.TesteDeUnidade\obj\Debug\netcoreapp2.2\DesafioSelecao.TesteDeUnidade.pdb
