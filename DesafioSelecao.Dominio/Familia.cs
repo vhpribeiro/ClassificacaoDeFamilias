@@ -9,13 +9,18 @@ namespace DesafioSelecao.Dominio
         public Status Status { get; protected set; }
         public int QuantidadeDeCriteriosAtendidos { get; protected internal set; }
         public int Pontuacao { get; protected internal set; }
-        private readonly IList<Pessoa> _pessoas;
+        private readonly IList<Pessoa> _pessoas = new List<Pessoa>();
         public IEnumerable<Pessoa> Pessoas => _pessoas;
 
         public Familia(Guid id, Status status)
         {
             Id = id;
             Status = status;
+        }
+
+        public void AdicionarPessoa(Pessoa pessoa)
+        {
+            _pessoas.Add(pessoa);
         }
     }
 }

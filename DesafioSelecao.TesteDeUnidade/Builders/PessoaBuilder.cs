@@ -48,7 +48,7 @@ namespace DesafioSelecao.TesteDeUnidade.Builders
 
         public Pessoa Build()
         {
-            return new Pessoa(_id, _nome, _tipo, _dataDeNascimento, _renda);
+            return new Pessoa(_id, _nome, _tipo, _dataDeNascimento);
         }
     }
 }

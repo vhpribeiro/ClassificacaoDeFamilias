@@ -9,5 +9,6 @@ namespace DesafioSelecao.Aplicacao.Dtos
         public Guid Id { get; set; }
         public IEnumerable<PessoaDto> Pessoas { get; set; }
         public Status Status { get; set; }
+        public IEnumerable<RendaDto> Rendas {get; set; }
     }
 }

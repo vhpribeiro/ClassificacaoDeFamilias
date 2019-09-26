@@ -1,9 +1,0 @@
-E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.Dominio\bin\Debug\netcoreapp2.2\DesafioSelecao.Dominio.deps.json
-E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.Dominio\bin\Debug\netcoreapp2.2\DesafioSelecao.Dominio.dll
-E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.Dominio\bin\Debug\netcoreapp2.2\DesafioSelecao.Dominio.pdb
-E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.Dominio\obj\Debug\netcoreapp2.2\DesafioSelecao.Dominio.csprojAssemblyReference.cache
-E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.Dominio\obj\Debug\netcoreapp2.2\DesafioSelecao.Dominio.csproj.CoreCompileInputs.cache
-E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.Dominio\obj\Debug\netcoreapp2.2\DesafioSelecao.Dominio.AssemblyInfoInputs.cache
-E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.Dominio\obj\Debug\netcoreapp2.2\DesafioSelecao.Dominio.AssemblyInfo.cs
-E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.Dominio\obj\Debug\netcoreapp2.2\DesafioSelecao.Dominio.dll
-E:\vhpri\Documents\Github\DesafioSelecao\DesafioSelecao.Dominio\obj\Debug\netcoreapp2.2\DesafioSelecao.Dominio.pdb
