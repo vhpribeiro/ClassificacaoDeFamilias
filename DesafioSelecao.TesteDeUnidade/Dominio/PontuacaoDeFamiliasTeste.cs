@@ -5,7 +5,7 @@ using Xunit;
 
 namespace DesafioSelecao.TesteDeUnidade.Dominio
 {
-    public class GerenciamentoDeClassificacaoDeFamiliasTeste
+    public class PontuacaoDeFamiliasTeste
     {
         [Fact]
         public void Deve_somar_a_pontuacao_da_familia_e_aumentar_quantidade_de_criterios_atendidos_quando_ela_atender_o_criterio()
@@ -24,11 +24,11 @@ namespace DesafioSelecao.TesteDeUnidade.Dominio
                 .With(f => f.Pontuacao, pontuacaoInicialDaFamilia)
                 .WithCollection(f => f.Pessoas, pessoas).Build();
             var criterioDeRendaInferiorA900 = new CriterioDeRendaInferiorA900();
-            var pontuacaoDeFamilias = new GerenciamentoDeClassificacaoDeFamilias();
+            var pontuacaoDeFamilias = new PontuacaoDeFamilias();
             var pontuacaoDaFamiliaEsperada = pontuacaoInicialDaFamilia + criterioDeRendaInferiorA900.Pontos;
             const int quantidadeDeCriteriosAtendidosEsperados = quantidadeDeCriteriosInicialmenteAtendidos + 1;
 
-            pontuacaoDeFamilias.Gerenciar(criterioDeRendaInferiorA900, familia);
+            pontuacaoDeFamilias.Pontuar(criterioDeRendaInferiorA900, familia);
 
             Assert.Equal(pontuacaoDaFamiliaEsperada, familia.Pontuacao);
             Assert.Equal(quantidadeDeCriteriosAtendidosEsperados, familia.QuantidadeDeCriteriosAtendidos);
@@ -52,9 +52,9 @@ namespace DesafioSelecao.TesteDeUnidade.Dominio
                 .With(f => f.Pontuacao, pontuacaoInicialDaFamilia)
                 .WithCollection(f => f.Pessoas, pessoas).Build();
             var criterioDeRendaInferiorA900 = new CriterioDeRendaInferiorA900();
-            var pontuacaoDeFamilias = new GerenciamentoDeClassificacaoDeFamilias();
+            var pontuacaoDeFamilias = new PontuacaoDeFamilias();
 
-            pontuacaoDeFamilias.Gerenciar(criterioDeRendaInferiorA900, familia);
+            pontuacaoDeFamilias.Pontuar(criterioDeRendaInferiorA900, familia);
 
             Assert.Equal(pontuacaoInicialDaFamilia, familia.Pontuacao);
             Assert.Equal(quantidadeDeCriteriosInicialmenteAtendidos, familia.QuantidadeDeCriteriosAtendidos);

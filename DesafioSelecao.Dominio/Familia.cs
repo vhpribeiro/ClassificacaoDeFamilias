@@ -16,9 +16,11 @@ namespace DesafioSelecao.Dominio
         {
             Id = id;
             Status = status;
+            QuantidadeDeCriteriosAtendidos = 0;
+            Pontuacao = 0;
         }
 
-        public void AdicionarPessoa(Pessoa pessoa)
+        public void Adicionar(Pessoa pessoa)
         {
             _pessoas.Add(pessoa);
         }

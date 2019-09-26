@@ -17,7 +17,9 @@ namespace DesafioSelecao.TesteDeUnidade.Dominio
             var familiaEsperada = new
             {
                 Id = id,
-                Status = status
+                Status = status,
+                QuantidadeDeCriteriosAtendidos = 0,
+                Pontuacao = 0
             };
 
             var familiaObtida = new Familia(id, status);
@@ -32,7 +34,7 @@ namespace DesafioSelecao.TesteDeUnidade.Dominio
             var familia = FamiliaBuilder.UmaFamilia().Build();
             var pessoa = PessoaBuilder.UmaPessoa().Build();
 
-            familia.AdicionarPessoa(pessoa);
+            familia.Adicionar(pessoa);
 
             var quantidadeDePessoasObtidas = familia.Pessoas.Count();
             Assert.Equal(quantidadeDePessoasEsperadas, quantidadeDePessoasObtidas);

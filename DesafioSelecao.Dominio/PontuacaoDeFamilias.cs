@@ -2,9 +2,9 @@
 
 namespace DesafioSelecao.Dominio
 {
-    public class GerenciamentoDeClassificacaoDeFamilias
+    public class PontuacaoDeFamilias
     {
-        public void Gerenciar(Criterio criterio, Familia familia)
+        public void Pontuar(Criterio criterio, Familia familia)
         {
             if (criterio.EhAtendidoPela(familia) <= 0) return;
 
