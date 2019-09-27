@@ -6,7 +6,7 @@ using DesafioSelecao.Dominio.Criterios;
 
 namespace DesafioSelecao.Aplicacao
 {
-    public class ClassificacaoDeFamilias
+    public class ClassificacaoDeFamilias : IClassificacaoDeFamilias
     {
         private readonly ICriterioRepositorio _criterioRepositorio;
 
@@ -29,5 +29,10 @@ namespace DesafioSelecao.Aplicacao
                 }
             }
         }
+    }
+
+    public interface IClassificacaoDeFamilias
+    {
+        void Classificar(FamiliaDto[] familiasDto);
     }
 }
