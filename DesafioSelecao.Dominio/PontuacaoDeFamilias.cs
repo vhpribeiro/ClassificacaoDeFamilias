@@ -1,5 +1,4 @@
-﻿using System;
-using DesafioSelecao.Dominio.Comum;
+﻿using DesafioSelecao.Dominio.Comum;
 using DesafioSelecao.Dominio.Criterios;
 
 namespace DesafioSelecao.Dominio

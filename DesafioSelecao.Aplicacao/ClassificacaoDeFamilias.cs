@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DesafioSelecao.Aplicacao.Dtos;
 using DesafioSelecao.Aplicacao.Mapeadores;
 using DesafioSelecao.Dominio;
@@ -15,10 +16,10 @@ namespace DesafioSelecao.Aplicacao
             _criterioRepositorio = criterioRepositorio;
         }
 
-        public void Classificar(FamiliaDto[] familiasDto)
+        public IEnumerable<Familia> Classificar(FamiliaDto[] familiasDto)
         {
             var criterios = _criterioRepositorio.ObterTodos();
-            var familias = familiasDto.Select(MapeadorDeFamilia.Mapear);
+            var familias = familiasDto.Where(f => f.Status == Status.CadastroValido).Select(MapeadorDeFamilia.Mapear).ToList();
             var pontuadorDeFamilias = new PontuacaoDeFamilias();
 
             foreach (var familia in familias)
@@ -28,11 +29,8 @@ namespace DesafioSelecao.Aplicacao
                     pontuadorDeFamilias.Pontuar(criterio, familia);
                 }
             }
-        }
-    }
 
-    public interface IClassificacaoDeFamilias
-    {
-        void Classificar(FamiliaDto[] familiasDto);
+            return familias;
+        }
     }
 }
