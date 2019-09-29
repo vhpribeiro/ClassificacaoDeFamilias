@@ -12,7 +12,7 @@ namespace DesafioSelecao.TesteDeUnidade.Dominio
         public void Deve_criar_uma_pessoa()
         {
             var id = Guid.NewGuid();
-            DateTime dataDeNascimento = new DateTime(2019, 06, 17);
+            DateTime dataDeNascimento = new DateTime(1996, 06, 17);
             const string nome = "Vitor";
             const TipoDePessoa tipo = TipoDePessoa.Pretendete;
             var pessoaEsperada = new
@@ -20,7 +20,8 @@ namespace DesafioSelecao.TesteDeUnidade.Dominio
                 Id = id,
                 DataDeNascimento = dataDeNascimento,
                 Nome = nome,
-                Tipo = tipo
+                Tipo = tipo,
+                Idade = 23
             };
 
             var pessoaObtida = new Pessoa(id, nome, tipo, dataDeNascimento);
