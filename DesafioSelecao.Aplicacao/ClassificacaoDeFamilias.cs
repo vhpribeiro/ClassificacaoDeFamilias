@@ -30,7 +30,7 @@ namespace DesafioSelecao.Aplicacao
                 }
             }
 
-            return familias;
+            return familias.OrderByDescending(f => f.Pontuacao);
         }
     }
 }

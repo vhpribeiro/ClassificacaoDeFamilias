@@ -20,7 +20,7 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
         private readonly FamiliaDto _familiaUm;
         private readonly FamiliaDto _familiaDois;
         private readonly CriterioDeRendaInferiorA900 _criterioDeRendaInferiorA900;
-        private readonly CriterioDePretendenteComIdadeIgualOuMaiorA45Anos _criterioDePretendenteComIdedadeIgualOuMaiorA45Anos;
+        private readonly CriterioDePretendenteComIdadeIgualOuMaiorA45Anos _criterioDePretendenteComIdadeIgualOuMaiorA45Anos;
         private PessoaDto[] _pessoasDaFamiliaUm;
         private PessoaDto[] _pessoasDaFamiliaDois;
         private readonly Guid _idFamilia;
@@ -31,6 +31,12 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
         private readonly RendaDto _rendaDoisDto;
         private RendaDto _rendaTresDto;
         private readonly Guid _idFamiliaDois;
+        private CriterioDeRendaEntre901Ah1500 _criterioDeRendaEntre901Ah1500;
+        private CriterioDeRendaEntre1501Ah2000 _criterioDeRendaEntre1501Ah2000;
+        private CriterioDePretendenteComIdadeEntre30Ah44Anos _criterioDePretendenteComIdadeEntre30Ah44Anos;
+        private CriterioDePretendenteComIdadeInferiorA30Anos _criterioDePretendenteComIdadeInferiorA30Anos;
+        private CriterioDe1Ou2DependentesMenoresDeIdade _criterioDe1Ou2DependentesMenoresDeIdade;
+        private CriterioDe3OuMaisDependentesMenoresDeIdade _criterioDe3OuMaisDependentesMenoresDeIdade;
 
         public ClassificacaoDeFamiliasTestes()
         {
@@ -63,7 +69,7 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
                 Nome = "Karina",
                 Tipo = TipoDePessoa.Pretendete
             };
-            _pessoasDaFamiliaUm = new[] { _pessoaDoisDto, _pessoaUmDto };
+            _pessoasDaFamiliaUm = new[] { _pessoaUmDto, _pessoaDoisDto };
             _rendaUmDto = new RendaDto { IdPessoa = idPessoaUm, Valor = 500 };
             _rendaDoisDto = new RendaDto { IdPessoa = idPessoaDois, Valor = 800 };
             _rendaTresDto = new RendaDto { IdPessoa = idPessoaTres, Valor = 500 };
@@ -85,25 +91,23 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
                 Status = status
             };
             _criterioDeRendaInferiorA900 = new CriterioDeRendaInferiorA900();
-            _criterioDePretendenteComIdedadeIgualOuMaiorA45Anos = new CriterioDePretendenteComIdadeIgualOuMaiorA45Anos();
-        }
-
-        [Fact]
-        public void Deve_obter_todos_criterios()
-        {
-            var criterios = new Criterio[] {_criterioDeRendaInferiorA900, _criterioDePretendenteComIdedadeIgualOuMaiorA45Anos};
-            var familiasDto = new[] {_familiaUm, _familiaDois};
-            _criterioRepositorio.Setup(cr => cr.ObterTodos()).Returns(criterios);
-
-            _classificacaoDeFamilias.Classificar(familiasDto);
-
-            _criterioRepositorio.Verify(cr => cr.ObterTodos());
+            _criterioDeRendaEntre901Ah1500 = new CriterioDeRendaEntre901Ah1500();
+            _criterioDeRendaEntre1501Ah2000 = new CriterioDeRendaEntre1501Ah2000();
+            _criterioDePretendenteComIdadeEntre30Ah44Anos = new CriterioDePretendenteComIdadeEntre30Ah44Anos();
+            _criterioDePretendenteComIdadeInferiorA30Anos = new CriterioDePretendenteComIdadeInferiorA30Anos();
+            _criterioDePretendenteComIdadeIgualOuMaiorA45Anos = new CriterioDePretendenteComIdadeIgualOuMaiorA45Anos();
+            _criterioDe1Ou2DependentesMenoresDeIdade = new CriterioDe1Ou2DependentesMenoresDeIdade();
+            _criterioDe3OuMaisDependentesMenoresDeIdade = new CriterioDe3OuMaisDependentesMenoresDeIdade();
         }
 
         [Fact]
         public void Deve_classificar_as_familias()
         {
-            var criterios = new Criterio[] { _criterioDeRendaInferiorA900, _criterioDePretendenteComIdedadeIgualOuMaiorA45Anos };
+            var criterios = new Criterio[] { _criterioDeRendaInferiorA900, _criterioDeRendaEntre901Ah1500,
+                _criterioDeRendaEntre1501Ah2000, _criterioDePretendenteComIdadeEntre30Ah44Anos,
+                _criterioDePretendenteComIdadeInferiorA30Anos, _criterioDePretendenteComIdadeIgualOuMaiorA45Anos,
+                _criterioDe1Ou2DependentesMenoresDeIdade, _criterioDe3OuMaisDependentesMenoresDeIdade
+            };
             var familiasDto = new[] { _familiaUm, _familiaDois };
             _criterioRepositorio.Setup(cr => cr.ObterTodos()).Returns(criterios);
             var rendaUm = MapeadorDeRenda.Mapear(_rendaUmDto.Valor);
@@ -131,13 +135,13 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
             familiaDois.Adicionar(pessoaTres);
             var familiasEsperadas = new[]
             {
-                familiaUm,
-                familiaDois
+                familiaDois,
+                familiaUm
             };
 
             var familiasObtidas = _classificacaoDeFamilias.Classificar(familiasDto);
 
-            familiasEsperadas.ToExpectedObject().ShouldMatch(familiasObtidas);
+            familiasEsperadas.ToExpectedObject(ctx => ctx.UseOrdinalComparison()).ShouldMatch(familiasObtidas);
         }
 
         [Theory]
@@ -147,7 +151,7 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
         public void Nao_deve_conter_nenhuma_familia_classificada_com_status_invalido(Status statusInvalido)
         {
             const int quantidadeDeFamiliasInvalidasEsperadas = 0;
-            var criterios = new Criterio[] { _criterioDeRendaInferiorA900, _criterioDePretendenteComIdedadeIgualOuMaiorA45Anos };
+            var criterios = new Criterio[] { _criterioDeRendaInferiorA900, _criterioDePretendenteComIdadeIgualOuMaiorA45Anos };
             _familiaUm.Status = statusInvalido;
             var familiasDto = new[] { _familiaUm, _familiaDois };
             _criterioRepositorio.Setup(cr => cr.ObterTodos()).Returns(criterios);
