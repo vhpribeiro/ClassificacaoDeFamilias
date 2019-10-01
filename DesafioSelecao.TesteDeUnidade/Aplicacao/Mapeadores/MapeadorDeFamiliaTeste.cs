@@ -3,6 +3,7 @@ using DesafioSelecao.Aplicacao.Dtos;
 using DesafioSelecao.Aplicacao.Mapeadores;
 using DesafioSelecao.Dominio;
 using ExpectedObjects;
+using Nosbor.FluentBuilder.Lib;
 using Xunit;
 
 namespace DesafioSelecao.TesteDeUnidade.Aplicacao.Mapeadores
@@ -48,6 +49,30 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao.Mapeadores
             var familiaObtida = MapeadorDeFamilia.Mapear(familiaDto);
 
             familiaEsperada.ToExpectedObject().ShouldMatch(familiaObtida);
+        }
+
+        [Fact]
+        public void Deve_mapear_uma_familia_contemplada()
+        {
+            var idFamilia = new Guid("12345678-1234-4567-8901-012345678912");
+            const int quantidadeDeCriteriosAtendidos = 4;
+            const int pontuacao = 12;
+            var familia = FluentBuilder<Familia>.New()
+                .With(f => f.QuantidadeDeCriteriosAtendidos, quantidadeDeCriteriosAtendidos)
+                .With(f => f.Pontuacao, pontuacao)
+                .With(f => f.Id, idFamilia)
+                .Build();
+            var familiaContempladaEsperada = new FamiliaContempladaDto
+            {
+                Id = idFamilia,
+                QuantidadeDeCriteriosAtendidos = quantidadeDeCriteriosAtendidos,
+                PontuacaoTotal = pontuacao,
+                DataDaSelecao = DateTime.Now.Date
+            };
+
+            var familiaContempladaObtida = MapeadorDeFamilia.MapearFamiliaContemplada(familia);
+
+            familiaContempladaEsperada.ToExpectedObject().ShouldMatch(familiaContempladaObtida);
         }
     }
 }

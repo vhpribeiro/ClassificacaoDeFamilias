@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DesafioSelecao.Aplicacao.Dtos;
 using DesafioSelecao.Dominio;
 
@@ -22,6 +23,17 @@ namespace DesafioSelecao.Aplicacao.Mapeadores
                 familia.Adicionar(pessoa);
 
             return familia;
+        }
+
+        public static FamiliaContempladaDto MapearFamiliaContemplada(Familia familia)
+        {
+            return new FamiliaContempladaDto
+            {
+                DataDaSelecao = DateTime.Now.Date,
+                Id = familia.Id,
+                PontuacaoTotal = familia.Pontuacao,
+                QuantidadeDeCriteriosAtendidos = familia.QuantidadeDeCriteriosAtendidos
+            };
         }
     }
 }

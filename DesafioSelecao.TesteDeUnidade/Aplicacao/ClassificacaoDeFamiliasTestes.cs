@@ -1,14 +1,15 @@
-﻿using System;
-using System.Linq;
-using DesafioSelecao.Aplicacao;
+﻿using DesafioSelecao.Aplicacao;
 using DesafioSelecao.Aplicacao.Dtos;
 using DesafioSelecao.Aplicacao.Mapeadores;
 using DesafioSelecao.Dominio;
 using DesafioSelecao.Dominio.Criterios;
-using DesafioSelecao.TesteDeUnidade.Builders;
 using ExpectedObjects;
 using Moq;
 using Nosbor.FluentBuilder.Lib;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using DesafioSelecao.Infra.Comunicacoes;
 using Xunit;
 
 namespace DesafioSelecao.TesteDeUnidade.Aplicacao
@@ -31,17 +32,19 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
         private readonly RendaDto _rendaDoisDto;
         private RendaDto _rendaTresDto;
         private readonly Guid _idFamiliaDois;
-        private CriterioDeRendaEntre901Ah1500 _criterioDeRendaEntre901Ah1500;
-        private CriterioDeRendaEntre1501Ah2000 _criterioDeRendaEntre1501Ah2000;
-        private CriterioDePretendenteComIdadeEntre30Ah44Anos _criterioDePretendenteComIdadeEntre30Ah44Anos;
-        private CriterioDePretendenteComIdadeInferiorA30Anos _criterioDePretendenteComIdadeInferiorA30Anos;
-        private CriterioDe1Ou2DependentesMenoresDeIdade _criterioDe1Ou2DependentesMenoresDeIdade;
-        private CriterioDe3OuMaisDependentesMenoresDeIdade _criterioDe3OuMaisDependentesMenoresDeIdade;
+        private readonly CriterioDeRendaEntre901Ah1500 _criterioDeRendaEntre901Ah1500;
+        private readonly CriterioDeRendaEntre1501Ah2000 _criterioDeRendaEntre1501Ah2000;
+        private readonly CriterioDePretendenteComIdadeEntre30Ah44Anos _criterioDePretendenteComIdadeEntre30Ah44Anos;
+        private readonly CriterioDePretendenteComIdadeInferiorA30Anos _criterioDePretendenteComIdadeInferiorA30Anos;
+        private readonly CriterioDe1Ou2DependentesMenoresDeIdade _criterioDe1Ou2DependentesMenoresDeIdade;
+        private readonly CriterioDe3OuMaisDependentesMenoresDeIdade _criterioDe3OuMaisDependentesMenoresDeIdade;
+        private Mock<IComunicacaoComContemplados> _comunicacaoComContemplados;
 
         public ClassificacaoDeFamiliasTestes()
         {
             _criterioRepositorio = new Mock<ICriterioRepositorio>();
-            _classificacaoDeFamilias = new ClassificacaoDeFamilias(_criterioRepositorio.Object);
+            _comunicacaoComContemplados = new Mock<IComunicacaoComContemplados>();
+            _classificacaoDeFamilias = new ClassificacaoDeFamilias(_criterioRepositorio.Object, _comunicacaoComContemplados.Object);
             _idFamilia = new Guid("12345678-1234-4567-8901-012345678912");
             _idFamiliaDois = new Guid("12345678-1234-4567-8901-012345678921");
             var idPessoaUm = new Guid("12345678-1234-4567-8901-012345679812");
@@ -115,8 +118,8 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
             var pessoaUm = MapeadorDePessoa.Mapear(_pessoaUmDto);
             var pessoaDois = MapeadorDePessoa.Mapear(_pessoaDoisDto);
             var familiaUm = FluentBuilder<Familia>.New()
-                .With(f => f.QuantidadeDeCriteriosAtendidos, 0)
-                .With(f => f.Pontuacao, 0)
+                .With(f => f.QuantidadeDeCriteriosAtendidos, 2)
+                .With(f => f.Pontuacao, 4)
                 .With(f => f.Status, Status.CadastroValido)
                 .With(f => f.Id, _idFamilia)
                 .Build();
@@ -126,8 +129,8 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
             familiaUm.Adicionar(pessoaDois);
             var pessoaTres = MapeadorDePessoa.Mapear(_pessoaTresDto);
             var familiaDois = FluentBuilder<Familia>.New()
-                .With(f => f.QuantidadeDeCriteriosAtendidos, 1)
-                .With(f => f.Pontuacao, 5)
+                .With(f => f.QuantidadeDeCriteriosAtendidos, 2)
+                .With(f => f.Pontuacao, 6)
                 .With(f => f.Status, Status.CadastroValido)
                 .With(f => f.Id, _idFamiliaDois)
                 .Build();
@@ -160,6 +163,6 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
 
             var quantidadeDeFamiliasInvalidasObtidas = familiasObtidas.Count(f => f.Status == statusInvalido);
             Assert.Equal(quantidadeDeFamiliasInvalidasEsperadas, quantidadeDeFamiliasInvalidasObtidas);
-        }
+        }    
     }
 }
