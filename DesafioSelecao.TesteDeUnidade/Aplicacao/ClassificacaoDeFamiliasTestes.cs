@@ -3,13 +3,13 @@ using DesafioSelecao.Aplicacao.Dtos;
 using DesafioSelecao.Aplicacao.Mapeadores;
 using DesafioSelecao.Dominio;
 using DesafioSelecao.Dominio.Criterios;
+using DesafioSelecao.Infra.Comunicacoes;
 using ExpectedObjects;
 using Moq;
 using Nosbor.FluentBuilder.Lib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DesafioSelecao.Infra.Comunicacoes;
 using Xunit;
 
 namespace DesafioSelecao.TesteDeUnidade.Aplicacao
@@ -38,7 +38,7 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
         private readonly CriterioDePretendenteComIdadeInferiorA30Anos _criterioDePretendenteComIdadeInferiorA30Anos;
         private readonly CriterioDe1Ou2DependentesMenoresDeIdade _criterioDe1Ou2DependentesMenoresDeIdade;
         private readonly CriterioDe3OuMaisDependentesMenoresDeIdade _criterioDe3OuMaisDependentesMenoresDeIdade;
-        private Mock<IComunicacaoComContemplados> _comunicacaoComContemplados;
+        private readonly Mock<IComunicacaoComContemplados> _comunicacaoComContemplados;
 
         public ClassificacaoDeFamiliasTestes()
         {
@@ -101,18 +101,18 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
             _criterioDePretendenteComIdadeIgualOuMaiorA45Anos = new CriterioDePretendenteComIdadeIgualOuMaiorA45Anos();
             _criterioDe1Ou2DependentesMenoresDeIdade = new CriterioDe1Ou2DependentesMenoresDeIdade();
             _criterioDe3OuMaisDependentesMenoresDeIdade = new CriterioDe3OuMaisDependentesMenoresDeIdade();
-        }
-
-        [Fact]
-        public void Deve_classificar_as_familias()
-        {
             var criterios = new Criterio[] { _criterioDeRendaInferiorA900, _criterioDeRendaEntre901Ah1500,
                 _criterioDeRendaEntre1501Ah2000, _criterioDePretendenteComIdadeEntre30Ah44Anos,
                 _criterioDePretendenteComIdadeInferiorA30Anos, _criterioDePretendenteComIdadeIgualOuMaiorA45Anos,
                 _criterioDe1Ou2DependentesMenoresDeIdade, _criterioDe3OuMaisDependentesMenoresDeIdade
             };
-            var familiasDto = new[] { _familiaUm, _familiaDois };
             _criterioRepositorio.Setup(cr => cr.ObterTodos()).Returns(criterios);
+        }
+
+        [Fact]
+        public void Deve_classificar_as_familias_e_ordenalas_por_pontuacao()
+        {
+            var familiasDto = new[] { _familiaUm, _familiaDois };
             var rendaUm = MapeadorDeRenda.Mapear(_rendaUmDto.Valor);
             var rendaDois = MapeadorDeRenda.Mapear(_rendaDoisDto.Valor);
             var pessoaUm = MapeadorDePessoa.Mapear(_pessoaUmDto);
@@ -163,6 +163,22 @@ namespace DesafioSelecao.TesteDeUnidade.Aplicacao
 
             var quantidadeDeFamiliasInvalidasObtidas = familiasObtidas.Count(f => f.Status == statusInvalido);
             Assert.Equal(quantidadeDeFamiliasInvalidasEsperadas, quantidadeDeFamiliasInvalidasObtidas);
-        }    
+        }
+
+        [Fact]
+        public void Deve_enviar_familias_contempladas_para_o_contemplados()
+        {
+            var criterios = new Criterio[] { _criterioDeRendaInferiorA900, _criterioDeRendaEntre901Ah1500,
+                _criterioDeRendaEntre1501Ah2000, _criterioDePretendenteComIdadeEntre30Ah44Anos,
+                _criterioDePretendenteComIdadeInferiorA30Anos, _criterioDePretendenteComIdadeIgualOuMaiorA45Anos,
+                _criterioDe1Ou2DependentesMenoresDeIdade, _criterioDe3OuMaisDependentesMenoresDeIdade
+            };
+            var familiasDto = new[] { _familiaUm, _familiaDois };
+            _criterioRepositorio.Setup(cr => cr.ObterTodos()).Returns(criterios);
+
+            _classificacaoDeFamilias.Classificar(familiasDto);
+
+            _comunicacaoComContemplados.Verify(cc => cc.Contemplar(It.IsAny<IEnumerable<FamiliaContempladaDto>>()));
+        }
     }
 }
